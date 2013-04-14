@@ -15,10 +15,14 @@ namespace PartyInvites.Controllers
         {
             int hour = DateTime.Now.Hour;
 
-            ViewBag.Greeting = hour < 12 ? "Good morning" : "Good afternoon";
-            ViewBag.YourName = "Scumbag";
+            ViewBag.Greeting = hour < 12 ? "Good morning" : "Good afternoon";  
 
             return View();        
+        }
+
+        public ViewResult RsvpForm() 
+        {
+            return View();
         }
 
     }

@@ -11,9 +11,14 @@ namespace PartyInvites.Controllers
         //
         // GET: /Home/
 
-        public ActionResult Index()
+        public ViewResult Index()
         {
-            return View();
+            int hour = DateTime.Now.Hour;
+
+            ViewBag.Greeting = hour < 12 ? "Good morning" : "Good afternoon";
+            ViewBag.YourName = "Scumbag";
+
+            return View();        
         }
 
     }

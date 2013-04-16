@@ -1,0 +1,44 @@
+﻿@model Razor.Models.Product
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index: @Model.Name</h2>
+
+
+@if (Model.Category == "Watersports") 
+{ 
+    @:Category: @Model.Category <b>Splash!</b>
+    
+    <p />
+    
+    <text>
+        Category: @Model.Category <b>Splash!</b>
+        <pre>
+            Row, row, row your boat,
+            Gently down the stream...
+        </pre>
+    </text>
+    
+    <p />    
+}
+
+
+@{
+    if(Model.Category == "Watersports")
+    {
+        <text>
+            Category: @Model.Category <b>Splash!</b>
+        </text>
+    }   
+    if(Model.Price > 10)
+    {
+        <h5>The price is @Model.Price - Pricey!</h5>
+    }
+        
+}
+
+
+Time view created: @ViewBag.ProcessingTime <br />
+Time view rendered: @DateTime.Now.TimeOfDay.ToString()

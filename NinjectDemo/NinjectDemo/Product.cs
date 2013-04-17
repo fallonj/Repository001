@@ -23,9 +23,17 @@ namespace NinjectDemo
     
     public class LinqValueCalculator : IValueCalculator
     {
+
+        private IDiscountHelper discounter;
+        
+        public LinqValueCalculator(IDiscountHelper discountParam)
+        {
+            discounter = discountParam;
+        }
+
         public decimal ValueProducts(params Product[] products)
         {
-            return products.Sum(p => p.Price);
+            return discounter.ApplyDiscount(products.Sum(p => p.Price));
         }
     }
 
@@ -54,6 +62,30 @@ namespace NinjectDemo
 
         }
 
+    }
+
+    public interface IDiscountHelper
+    {
+        decimal ApplyDiscount(decimal totalParam);
+    }
+
+    public class DefaultDiscountHelper : IDiscountHelper
+    {
+        public decimal JohnsDiscountSize { get; set; }
+
+        public decimal ApplyDiscount(decimal totalParam)
+        {
+            return (totalParam - (JohnsDiscountSize / 100m * totalParam));
+        }
+    }
+
+    public class CrazyDiscountHelper : IDiscountHelper
+    {
+
+        public decimal ApplyDiscount(decimal totalParam)
+        {
+            return (totalParam - (50m / 100m * totalParam));
+        }
     }
 
 }

@@ -15,7 +15,11 @@ namespace UnitTestingDemo
 
         public void ReducePrices(decimal priceReduction)
         {
-            throw new NotImplementedException();
+            foreach (Product p in productRepository.GetProducts())
+            {
+                p.Price = Math.Max(p.Price - priceReduction, 1);
+                productRepository.UpdateProduct(p);
+            }
         }
     }
 }

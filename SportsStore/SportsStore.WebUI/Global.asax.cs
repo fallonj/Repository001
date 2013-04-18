@@ -35,6 +35,8 @@ namespace SportsStore.WebUI
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+
+            ControllerBuilder.Current.SetControllerFactory(new Infrastructure.NinjectControllerFactory());
         }
     }
 }

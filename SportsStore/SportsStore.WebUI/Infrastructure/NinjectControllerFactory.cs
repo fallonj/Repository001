@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Ninject;
+using Moq;
+using SportsStore.Domain.Abstract;
+using SportsStore.Domain.Entities;
 
 namespace SportsStore.WebUI.Infrastructure
 {
@@ -28,7 +31,21 @@ namespace SportsStore.WebUI.Infrastructure
 
         private void AddBindings()
         {
+            //Mock implementation of the IProductsRepository interface
+            Mock<IProductsRepository> mock = new Mock<IProductsRepository>();
+            mock.Setup(m => m.Products).Returns(
+                                                new List<Product>
+                                                {
+                                                    new Product { Name = "Football", Price = 25},
+                                                    new Product { Name="Surf Board", Price = 179},
+                                                    new Product{Name = "Running Shoes", Price = 95}
+                                                }.AsQueryable());
+
+            ninjectKernel.Bind<IProductsRepository>().ToConstant(mock.Object);
+            
+            
             //Put additional bindings here
+
         }
    
 

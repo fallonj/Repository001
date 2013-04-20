@@ -8,6 +8,7 @@ using Ninject;
 using Moq;
 using SportsStore.Domain.Abstract;
 using SportsStore.Domain.Entities;
+using SportsStore.Domain.Concrete;
 
 namespace SportsStore.WebUI.Infrastructure
 {
@@ -41,8 +42,9 @@ namespace SportsStore.WebUI.Infrastructure
                                                     new Product{Name = "Running Shoes", Price = 95}
                                                 }.AsQueryable());
 
-            ninjectKernel.Bind<IProductsRepository>().ToConstant(mock.Object);
-            
+            //ninjectKernel.Bind<IProductsRepository>().ToConstant(mock.Object);
+            ninjectKernel.Bind<IProductsRepository>().To<EFProductRepository>();
+         
             
             //Put additional bindings here
 

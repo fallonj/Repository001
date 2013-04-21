@@ -44,7 +44,7 @@ namespace SportsStore.WebUI.Infrastructure
 
             //ninjectKernel.Bind<IProductsRepository>().ToConstant(mock.Object);
             ninjectKernel.Bind<IProductsRepository>().To<EFProductRepository>();
-         
+             
             
             //Put additional bindings here
                 

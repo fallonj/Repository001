@@ -23,7 +23,7 @@ namespace SportsStore.UnitTests
             //Arrange
             HtmlHelper myHelper = null;
 
-            PagingInfo pagingInfo = new PagingInfo { CurrentPage = 2, TotalItems = 38, ItemsPerPage = 10 };
+            PagingInfo pagingInfo = new PagingInfo { CurrentPage = 2, TotalItems = 28, ItemsPerPage = 10 };
 
             Func<int, string> pageUrlDelegate = (i) => "Page " + i;
 

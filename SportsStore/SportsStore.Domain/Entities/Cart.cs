@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SportsStore.Domain.Entities
 {
-    class Cart
+    public class Cart
     {
         private List<CartLine> lineCollection = new List<CartLine>();
 

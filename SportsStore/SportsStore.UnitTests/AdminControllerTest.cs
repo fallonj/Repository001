@@ -128,5 +128,51 @@ namespace SportsStore.UnitTests
             // Assert - check the method result type
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
+
+
+        [TestMethod]
+        public void Can_Delete_Valid_Products()
+        {
+            // Arrange - create a Product
+            Product prod = new Product { ProductID = 2, Name = "Test" };
+            // Arrange - create the mock repository
+            Mock<IProductsRepository> mock = new Mock<IProductsRepository>();
+            mock.Setup(m => m.Products).Returns(new Product[] {
+                new Product {ProductID = 1, Name = "P1"},
+                prod,
+                new Product {ProductID = 3, Name = "P3"},
+                }.AsQueryable());
+            // Arrange - create the controller
+            AdminController target = new AdminController(mock.Object);
+            
+            // Act - delete the product
+            target.Delete(prod.ProductID);
+            
+            // Assert - ensure that the repository delete method was
+            // called with the correct Product
+            mock.Verify(m => m.DeleteProduct(prod));
+        }
+
+        [TestMethod]
+        public void Cannot_Delete_Invalid_Products()
+        {
+            // Arrange - create the mock repository
+            Mock<IProductsRepository> mock = new Mock<IProductsRepository>();
+            mock.Setup(m => m.Products).Returns(new Product[] {
+                new Product {ProductID = 1, Name = "P1"},
+                new Product {ProductID = 2, Name = "P2"},
+                new Product {ProductID = 3, Name = "P3"},
+                }.AsQueryable());
+            // Arrange - create the controller
+            AdminController target = new AdminController(mock.Object);
+
+            // Act - delete using an ID that doesn't exist
+            target.Delete(100);
+            
+            // Assert - ensure that the repository delete method was
+            // called with the correct Product
+            mock.Verify(m => m.DeleteProduct(It.IsAny<Product>()), Times.Never());
+        }
+
     }
 }

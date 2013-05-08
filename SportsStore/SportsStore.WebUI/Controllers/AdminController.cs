@@ -8,6 +8,7 @@ using SportsStore.Domain.Entities;
 
 namespace SportsStore.WebUI.Controllers
 {
+    [Authorize] //This is the Authorize filter - it will redirect you to a log in page if you aren't already logged in
     public class AdminController : Controller
     {
         private IProductsRepository repository;
